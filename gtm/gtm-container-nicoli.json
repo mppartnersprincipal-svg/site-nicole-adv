@@ -1,6 +1,6 @@
 {
   "exportFormatVersion": 2,
-  "exportTime": "2026-10-19 23:22:42",
+  "exportTime": "2026-10-20 13:03:17",
   "containerVersion": {
     "path": "accounts/0/containers/0/versions/0",
     "accountId": "0",
@@ -12,7 +12,7 @@
       "accountId": "0",
       "containerId": "0",
       "name": "nicoliadvogados.adv.br",
-      "publicId": "GTM-XXXXXXX",
+      "publicId": "GTM-WWS4XFPQ",
       "usageContext": [
         "WEB"
       ]
@@ -62,7 +62,7 @@
         "consentSettings": {
           "consentStatus": "NOT_NEEDED"
         },
-        "paused": true
+        "paused": false
       },
       {
         "accountId": "0",
@@ -208,7 +208,7 @@
         "consentSettings": {
           "consentStatus": "NOT_NEEDED"
         },
-        "paused": true
+        "paused": false
       },
       {
         "accountId": "0",
@@ -354,7 +354,7 @@
         "consentSettings": {
           "consentStatus": "NOT_NEEDED"
         },
-        "paused": true
+        "paused": false
       },
       {
         "accountId": "0",
@@ -500,7 +500,7 @@
         "consentSettings": {
           "consentStatus": "NOT_NEEDED"
         },
-        "paused": true
+        "paused": false
       },
       {
         "accountId": "0",
@@ -646,7 +646,7 @@
         "consentSettings": {
           "consentStatus": "NOT_NEEDED"
         },
-        "paused": true
+        "paused": false
       },
       {
         "accountId": "0",
@@ -807,7 +807,7 @@
         "consentSettings": {
           "consentStatus": "NOT_NEEDED"
         },
-        "paused": true
+        "paused": false
       },
       {
         "accountId": "0",
@@ -953,7 +953,7 @@
         "consentSettings": {
           "consentStatus": "NOT_NEEDED"
         },
-        "paused": true
+        "paused": false
       },
       {
         "accountId": "0",
@@ -1084,7 +1084,7 @@
         "consentSettings": {
           "consentStatus": "NOT_NEEDED"
         },
-        "paused": true
+        "paused": false
       },
       {
         "accountId": "0",
@@ -1275,7 +1275,7 @@
         "consentSettings": {
           "consentStatus": "NOT_NEEDED"
         },
-        "paused": true
+        "paused": false
       },
       {
         "accountId": "0",
@@ -1496,7 +1496,7 @@
         "consentSettings": {
           "consentStatus": "NOT_NEEDED"
         },
-        "paused": true
+        "paused": false
       },
       {
         "accountId": "0",
@@ -1612,7 +1612,7 @@
         "consentSettings": {
           "consentStatus": "NOT_NEEDED"
         },
-        "paused": true
+        "paused": false
       },
       {
         "accountId": "0",
@@ -1728,7 +1728,7 @@
         "consentSettings": {
           "consentStatus": "NOT_NEEDED"
         },
-        "paused": true
+        "paused": false
       },
       {
         "accountId": "0",
@@ -1859,7 +1859,7 @@
         "consentSettings": {
           "consentStatus": "NOT_NEEDED"
         },
-        "paused": true
+        "paused": false
       },
       {
         "accountId": "0",
@@ -2005,7 +2005,7 @@
         "consentSettings": {
           "consentStatus": "NOT_NEEDED"
         },
-        "paused": true
+        "paused": false
       },
       {
         "accountId": "0",
@@ -2090,7 +2090,7 @@
         "consentSettings": {
           "consentStatus": "NOT_NEEDED"
         },
-        "paused": true
+        "paused": false
       },
       {
         "accountId": "0",
@@ -2175,7 +2175,7 @@
         "consentSettings": {
           "consentStatus": "NOT_NEEDED"
         },
-        "paused": true
+        "paused": false
       },
       {
         "accountId": "0",
@@ -2240,7 +2240,7 @@
         "consentSettings": {
           "consentStatus": "NOT_NEEDED"
         },
-        "paused": true
+        "paused": false
       },
       {
         "accountId": "0",
@@ -2897,7 +2897,7 @@
           {
             "type": "TEMPLATE",
             "key": "value",
-            "value": "G-XXXXXXXXXX"
+            "value": "G-1PRGGLDX7K"
           }
         ]
       },
@@ -2911,7 +2911,7 @@
           {
             "type": "TEMPLATE",
             "key": "value",
-            "value": "XXXXXXXXX"
+            "value": "10786599420"
           }
         ]
       },
@@ -2925,7 +2925,7 @@
           {
             "type": "TEMPLATE",
             "key": "value",
-            "value": "LABEL_GENERATE_LEAD"
+            "value": "AYQECLvtvKMdEPzjuZco"
           }
         ]
       },
@@ -2939,7 +2939,7 @@
           {
             "type": "TEMPLATE",
             "key": "value",
-            "value": "LABEL_CLICK_WHATSAPP"
+            "value": "l3GvCI_lvKMdEPzjuZco"
           }
         ]
       },
