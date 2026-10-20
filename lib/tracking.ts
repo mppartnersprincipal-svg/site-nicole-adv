@@ -29,6 +29,7 @@ import {
   toAttribution,
 } from "./attribution-core";
 import type { Attribution, ConsentState, StoredAttribution } from "./attribution-core";
+import { coletarEvento } from "./painel/coletor";
 
 export type { Attribution, ConsentState, Touch } from "./attribution-core";
 
@@ -120,6 +121,12 @@ export function pushDataLayer(entry: Record<string, unknown>): void {
     getDataLayer().push(entry);
   } catch {
     // dataLayer indisponível — medição nunca pode quebrar o site
+  }
+  try {
+    // Espelha os eventos de contato no painel /dashboard (coleta própria, anônima)
+    if (typeof entry.event === "string") coletarEvento(entry.event, entry);
+  } catch {
+    // idem
   }
 }
 

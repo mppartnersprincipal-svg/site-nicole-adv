@@ -84,7 +84,7 @@ Ver `docs/DESIGN-SYSTEM.md`. Resumo: claro editorial; bordô `#530103` (logo), c
 ```bash
 npm run dev      # http://localhost:3000
 npm run build    # build de produção (482 rotas)
-npm test         # 119 testes: tracking/WhatsApp + painel (node:test, sem chamadas reais)
+npm test         # 145 testes: tracking/WhatsApp + painel + SQL no PGlite (node:test, sem chamadas reais)
 node gtm/gen-container.mjs   # regenera o container GTM com IDs do .env.local
 ```
 
@@ -99,9 +99,11 @@ Implementado conforme padrão MP — detalhes em `gtm/TRACKING.md`.
 
 ## Painel (`/dashboard`)
 
-GA4 (Data API) + Google Ads (API via MCC), só leitura, login por senha — ver `docs/DASHBOARD.md`.
+Porte do painel da Sólida: coleta própria anônima (Supabase, tabelas `nicoli_*`) + Google Ads (API via MCC) + GA4 (Data API), login por senha — ver `docs/DASHBOARD.md`.
 - Fica fora de `app/(site)`: **nunca** colocar o `SiteChrome`/GTM nele (contaria as visitas da equipe no GA4).
-- Variáveis só de servidor: `DASHBOARD_PASSWORD`, `DASHBOARD_SECRET`, `GA4_PROPERTY_ID`, `GOOGLE_SERVICE_ACCOUNT_JSON`, `GOOGLE_ADS_*`.
+- Coleta: `lib/painel/coletor.ts` (montado pelo `<Coletor />` no Analytics) → `/api/collect`; eventos de contato espelhados em `pushDataLayer` (`lib/tracking.ts`).
+- Banco: `supabase/migrations/0001_nicoli_analytics.sql` (só `service_role`; testada em PGlite).
+- Variáveis só de servidor: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `DASHBOARD_PASSWORD`, `DASHBOARD_SECRET`, `GA4_PROPERTY_ID`, `GOOGLE_SERVICE_ACCOUNT_JSON`, `GOOGLE_ADS_*`.
 - Página nova do site vai em `app/(site)/`, senão fica sem header/rodapé/GTM.
 
 ---

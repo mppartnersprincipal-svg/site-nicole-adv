@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
+import { Loader2, Lock } from "lucide-react";
 
-interface LoginPainelProps {
-  onEntrar: () => void;
-}
-
-export function LoginPainel({ onEntrar }: LoginPainelProps) {
+/** Login por senha única (POST /api/painel/login → cookie httpOnly); depois recarrega o painel no servidor. */
+export function LoginPainel() {
+  const router = useRouter();
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState<string | null>(null);
   const [isEnviando, setIsEnviando] = useState(false);
@@ -22,7 +22,7 @@ export function LoginPainel({ onEntrar }: LoginPainelProps) {
         body: JSON.stringify({ password: senha }),
       });
       if (resposta.ok) {
-        onEntrar();
+        router.refresh();
         return;
       }
       const corpo = (await resposta.json().catch(() => ({}))) as { error?: string };
@@ -35,13 +35,14 @@ export function LoginPainel({ onEntrar }: LoginPainelProps) {
   }
 
   return (
-    <div className="grid min-h-dvh place-items-center bg-bordo-900 px-4">
-      <form onSubmit={handleSubmit} className="w-full max-w-sm bg-marfim p-8 shadow-2xl">
-        {/* eslint-disable-next-line @next/next/no-img-element -- logo estático pequeno, sem otimização necessária */}
-        <img src="/brand/logo-horizontal-bordo.png" alt="Nicoli Sociedade de Advogados" className="h-10 w-auto" />
-        <h1 className="mt-8 font-display text-3xl text-bordo-700">Painel de resultados</h1>
-        <p className="mt-2 text-sm text-cinza">Google Analytics e Google Ads do site.</p>
-        <label htmlFor="senha" className="mt-8 block text-sm font-medium text-grafite">
+    <div className="grid min-h-[60vh] place-items-center">
+      <form onSubmit={handleSubmit} className="w-full max-w-sm rounded-2xl border border-line bg-white p-8 shadow-[0_8px_24px_rgba(30,26,24,0.06)]">
+        <span className="inline-flex size-10 items-center justify-center rounded-full bg-brand-tint text-brand-action">
+          <Lock aria-hidden className="size-4" />
+        </span>
+        <h1 className="mt-5 font-sans text-2xl font-bold text-ink">Painel de resultados</h1>
+        <p className="mt-1 text-sm text-ink-muted">Visitas, contatos, Google Ads e GA4 do site.</p>
+        <label htmlFor="senha" className="mt-6 block text-sm font-semibold text-ink">
           Senha
         </label>
         <input
@@ -51,18 +52,19 @@ export function LoginPainel({ onEntrar }: LoginPainelProps) {
           required
           value={senha}
           onChange={(e) => setSenha(e.target.value)}
-          className="mt-2 w-full border border-pedra bg-branco px-3 py-3 text-grafite outline-none focus:border-bordo-700 focus:ring-2 focus:ring-champanhe-400"
+          className="mt-2 min-h-11 w-full rounded-full border border-line bg-white px-4 text-ink outline-none focus:border-brand-action focus:ring-2 focus:ring-champanhe-400"
         />
-        {erro && (
-          <p role="alert" className="mt-3 text-sm text-bordo-600">
+        {erro ? (
+          <p role="alert" className="mt-3 text-sm text-brand-hover">
             {erro}
           </p>
-        )}
+        ) : null}
         <button
           type="submit"
           disabled={isEnviando}
-          className="mt-6 w-full bg-bordo-700 px-4 py-3 text-sm font-medium uppercase tracking-[0.14em] text-marfim transition hover:bg-bordo-600 disabled:opacity-60"
+          className="mt-6 inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-brand-action px-4 text-sm font-semibold text-white transition-colors hover:bg-brand-hover disabled:opacity-60"
         >
+          {isEnviando ? <Loader2 aria-hidden className="size-4 animate-spin" /> : null}
           {isEnviando ? "Entrando…" : "Entrar"}
         </button>
       </form>

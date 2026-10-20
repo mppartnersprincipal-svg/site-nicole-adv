@@ -71,6 +71,16 @@
   --color-cinza: var(--cor-cinza);
   --color-whatsapp: var(--cor-whatsapp);
 
+  /* Painel /dashboard: mesmos nomes do painel da Sólida, com as cores da Nicoli */
+  --color-ink: var(--cor-grafite);
+  --color-ink-body: #3d3532;
+  --color-ink-muted: var(--cor-cinza);
+  --color-line: var(--cor-pedra);
+  --color-surface-alt: var(--cor-areia);
+  --color-brand-action: var(--cor-bordo-700);
+  --color-brand-hover: var(--cor-bordo-600);
+  --color-brand-tint: var(--cor-bordo-100);
+
   --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
   --font-sans: var(--font-jost), "Jost", system-ui, sans-serif;
 

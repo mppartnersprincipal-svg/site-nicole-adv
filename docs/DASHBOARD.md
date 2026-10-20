@@ -1,93 +1,90 @@
 # Painel de resultados — `/dashboard`
 
-Painel interno com as métricas do **GA4** e do **Google Ads** do site da Nicoli. Só leitura: o painel
-nunca altera campanhas nem configurações. Login por senha única.
+Porte do painel da **Sólida Transporte** (mesmos blocos e layout, cores da Nicoli), com o GA4 como
+seção extra. Login por senha única. Só leitura: nunca altera campanhas.
 
 ```
-/dashboard (login) ──▶ /api/painel/login       (cookie httpOnly de 30 dias)
-                   ├─▶ /api/painel/ga4         ──▶ GA4 Data API (conta de serviço, papel Leitor)
-                   └─▶ /api/painel/google-ads  ──▶ Google Ads API (OAuth da M|P, via MCC 603-989-2603)
+Site (app/(site)) ──▶ lib/painel/coletor.ts ──sendBeacon──▶ /api/collect ──▶ Supabase (nicoli_sessions, nicoli_events)
+       └── lib/tracking.ts (dataLayer → GTM → GA4/Ads) ──espelha contatos──▶ coletor
+/dashboard (login) ──▶ funções SQL nicoli_* (service role)
+                   ├─▶ Google Ads API (OAuth da M|P, via MCC 603-989-2603)
+                   └─▶ GA4 Data API (conta de serviço, papel Leitor)
 ```
 
-- O `/dashboard` fica **fora** de `app/(site)`: não carrega header, rodapé, GTM nem banner de cookies,
-  para as visitas da equipe não entrarem no GA4.
-- `noindex` em três camadas: metadata da página, cabeçalho `X-Robots-Tag` e `Disallow` no robots.txt.
-- GA4 e Ads são consultados em paralelo e de forma independente: se um falhar, o outro continua.
-- Erros do Google nunca chegam crus ao navegador (podem conter dados da conta): o servidor troca por
-  mensagens seguras em pt-BR.
-- Sem coleta própria (Supabase): os números vêm direto do GA4 e do Ads, que já recebem os eventos pelo GTM
-  respeitando o Consent Mode (LGPD).
+## Blocos (na ordem da página)
 
-## Arquivos
+1. **Visão geral**: visitas, páginas vistas, tempo por visita e por página, cliques no WhatsApp,
+   formulários enviados, cliques no telefone, conversão (visitas → contato), com variação vs. período anterior.
+2. **Google Ads**: investimento, impressões, cliques, CTR, CPC, conversões, custo/conversão, conversões por ação, campanhas.
+3. **GA4**: sessões, usuários, engajamento, eventos-chave, origem, dispositivo e eventos do site.
+4. **Visitas por dia** + **origem** (Google Ads × orgânico × direto × redes).
+5. **Novo × recorrente**, **cobertura de consentimento** (banner LGPD) e **funil do formulário**.
+6. **Dispositivo**, **contatos por área** e **WhatsApp por botão**.
+7. **Contatos pelo site**: formulário/WhatsApp/telefone × área × origem × onde foi clicado.
+8. **Jornadas**: o caminho de cada lead (origem → páginas → contato), com filtros.
+9. **Páginas** (mais vistas; tempo, rolagem e contatos por página).
+10. **Horários** (dia × hora) e **cidades/estados**.
+11. **Campanhas no site** (UTM/gclid) e **blog** (visitas, leituras completas, tempo, rolagem).
+12. **Tudo que foi clicado** e **ao vivo** (atualiza a cada 30 s).
 
-| Arquivo | Função |
+Filtros na URL: `?periodo=hoje|7d|30d|90d|custom&de=&ate=&origem=google_ads|…` (link compartilhável).
+
+## Coleta própria e LGPD
+
+- Anônima: sessão = UUID aleatório em `sessionStorage`; sem cookie, sem IP gravado (só hash em memória
+  para limitar abuso), sem user-agent cru (só família de navegador/sistema). Cidade/estado vêm do header da Vercel.
+- **Visitante recorrente** (ID em `localStorage`, 13 meses) só para quem **aceitou cookies de análise**.
+  Recusar apaga o ID na hora.
+- Espelha do dataLayer só: `click_*`, `generate_lead`, `form_start`, `blog_read`, `consent_update`, e só os
+  parâmetros `link_location`, `link_label`, `link_url`, `lead_area`, `form_id`, `article_slug`, `read_trigger`,
+  `consent_*` (nunca UTM/gclid por evento, nunca dado do formulário).
+- Contatos (WhatsApp, telefone, formulário) são enviados na hora; o resto vai em lotes de 5 s ou ao sair da página.
+- Não coleta em `/dashboard` nem `/api`, nem de robôs (`navigator.webdriver`, UA de bot).
+- Retenção: `select nicoli_purge(13)` apaga sessões com mais de 13 meses (agendar no pg_cron, opcional).
+
+## Banco (Supabase)
+
+Migração: [`supabase/migrations/0001_nicoli_analytics.sql`](../supabase/migrations/0001_nicoli_analytics.sql)
+(idempotente; testada em PGlite por `tests/painel-sql.test.mjs`).
+
+- Projeto compartilhado dos painéis da M|P (`khipnjfbxjgvmjvyxero`), separação **só pelo prefixo `nicoli_`**.
+- RLS ligado e **nenhuma** permissão para `anon`/`authenticated`: tabelas e funções só pelo `service_role`.
+  (Diferente da Sólida, que libera leitura para `authenticated`: num projeto compartilhado isso exporia os dados.)
+- Para aplicar: Supabase → SQL Editor do projeto → colar o arquivo inteiro → Run.
+
+## Variáveis (Vercel → Settings → Environment Variables, Production) + redeploy
+
+| Variável | Valor |
 |---|---|
-| `app/(painel)/dashboard/page.tsx` | Página (noindex) |
-| `app/api/painel/{login,ga4,google-ads}/route.ts` | Rotas protegidas pela sessão |
-| `lib/painel/auth.ts` | Senha + token HMAC (`DASHBOARD_PASSWORD`, `DASHBOARD_SECRET`) |
-| `lib/painel/periodo.ts` | Período `?de=&ate=` no fuso de Goiânia + período anterior |
-| `lib/painel/ga4.ts` | Data API (2 lotes: visão geral e detalhe) |
-| `lib/painel/google-ads.ts` | SearchStream (totais, anterior, série diária, campanhas, conversões por ação) |
-| `lib/painel/formato.ts` | Números, moeda e rótulos em pt-BR (áreas, canais, eventos) |
-| `components/painel/*` | Interface (KPIs, colunas diárias, rankings, tabela de campanhas) |
-| `tests/painel-*.test.mjs` | 61 testes com respostas simuladas (nenhuma chamada real) |
-
-## O que o painel mostra
-
-**Topo:** contatos pelo site (GA4: `generate_lead` + `click_whatsapp` + `click_phone`), investimento e
-custo por conversão do Ads. Tudo comparado ao período anterior de mesmo tamanho.
-
-**Google Ads:** investimento, conversões, custo/conversão, cliques, CTR, CPC médio; investimento por dia;
-conversões por ação; tabela de campanhas (inclusive pausadas).
-
-**GA4:** sessões, usuários, engajamento, eventos-chave; sessões por dia; ações no site (funil do
-`gtm/TRACKING.md`); **páginas que geraram contato** (as 11 áreas aparecem pelo nome); origem das sessões;
-páginas de entrada; dispositivos.
-
-> Os números de "contatos" (GA4) e "conversões" (Ads) não batem 1:1: o GA4 conta todos os visitantes
-> que aceitaram cookies de análise, de qualquer origem; o Ads conta só cliques de anúncio, com modelo de
-> atribuição próprio e conversões fracionárias.
-
-## Variáveis de ambiente (Vercel → Settings → Environment Variables)
-
-Cadastrar em **Production** (e Preview, se quiser testar lá). **Só valem depois de redeploy.**
-
-| Variável | Valor | Onde achar |
-|---|---|---|
-| `DASHBOARD_PASSWORD` | senha do painel (mín. 8) | definir |
-| `DASHBOARD_SECRET` | texto aleatório (mín. 16) | definir |
-| `GA4_PROPERTY_ID` | número da propriedade (**não** o `G-`) | GA4 → Administrador → Detalhes da propriedade |
-| `GOOGLE_SERVICE_ACCOUNT_JSON` | JSON da conta de serviço `dashboard-ga4@…` | mesmo dos outros painéis (Construbloc) |
-| `GOOGLE_ADS_DEVELOPER_TOKEN` / `_CLIENT_ID` / `_CLIENT_SECRET` / `_REFRESH_TOKEN` | iguais aos outros painéis | `.env.local` da Construbloc |
-| `GOOGLE_ADS_LOGIN_CUSTOMER_ID` | `603-989-2603` (MCC da M\|P) | fixo |
-| `GOOGLE_ADS_CUSTOMER_ID` | conta de anúncios **da Nicoli** (10 dígitos) | Google Ads pela MCC → Contas |
-| `GOOGLE_ADS_API_VERSION` | opcional (padrão `v25`) | — |
-
-Passos extras:
-1. GA4 da Nicoli → Administrador → Gerenciamento de acesso à propriedade → adicionar o `client_email`
-   do JSON como **Leitor**.
-2. A conta de anúncios da Nicoli precisa estar vinculada à MCC `603-989-2603`.
-3. Redeploy.
+| `SUPABASE_URL` | `https://khipnjfbxjgvmjvyxero.supabase.co` |
+| `SUPABASE_SERVICE_ROLE_KEY` | igual aos outros painéis (`.env.local` da Construbloc) |
+| `DASHBOARD_PASSWORD` / `DASHBOARD_SECRET` | senha (mín. 8) / texto aleatório (mín. 16) |
+| `GA4_PROPERTY_ID` | `277798652` |
+| `GOOGLE_SERVICE_ACCOUNT_JSON` | JSON da conta de serviço `dashboard-ga4@…` (Leitor no GA4 da Nicoli) |
+| `GOOGLE_ADS_DEVELOPER_TOKEN` / `_CLIENT_ID` / `_CLIENT_SECRET` / `_REFRESH_TOKEN` | iguais aos outros painéis |
+| `GOOGLE_ADS_LOGIN_CUSTOMER_ID` | `603-989-2603` (MCC da M\|P) |
+| `GOOGLE_ADS_CUSTOMER_ID` | conta de anúncios da Nicoli (10 dígitos) |
 
 ## Erros conhecidos
 
 | O painel mostra | Causa |
 |---|---|
-| "Painel não configurado" no login | faltou redeploy, ou senha < 8 / segredo < 16 |
-| Google Ads com o nome da **M\|P** | `GOOGLE_ADS_CUSTOMER_ID` com a conta da agência — trocar pela da Nicoli |
-| "conta de administrador (MCC)" | colocaram o ID da MCC em `GOOGLE_ADS_CUSTOMER_ID` |
-| "configuração … precisa ser revisada" | ID com formato errado (ex.: o `AW-…` de conversão no lugar da conta) |
+| "Coleta própria aguardando conexão" | faltam `SUPABASE_URL`/`SUPABASE_SERVICE_ROLE_KEY` ou o redeploy |
+| KPIs zerados com Supabase configurado | migração não aplicada (as funções `nicoli_*` não existem) |
+| "Painel não configurado" no login | senha < 8 / segredo < 16, ou falta redeploy |
+| Google Ads com o nome da **M\|P** | `GOOGLE_ADS_CUSTOMER_ID` com a conta da agência |
+| "conta de administrador (MCC)" | ID da MCC em `GOOGLE_ADS_CUSTOMER_ID` |
 | GA4 "Adicione o e-mail dela como Leitor" | conta de serviço sem acesso à propriedade |
-| GA4 "use o ID numérico" | colocaram o `G-XXXX` em `GA4_PROPERTY_ID` |
-| "Ações no site" vazio | GTM ainda não publicado, ou eventos sem consentimento de análise |
+| Cidades vazias | normal em ambiente local (vêm dos headers da Vercel) |
 
-## Conferência depois do deploy
+## Testes
 
+`npm test` roda tudo sem chamadas reais: GA4 e Ads com respostas simuladas, validação do lote da coleta,
+origem, filtro, jornadas e a migração SQL inteira no PGlite (triggers, agregações e permissões).
+
+Conferência no ar:
 ```bash
-curl -s -X POST -H 'Content-Type: application/json' -d '{"password":"x"}' https://nicoliadvogados.adv.br/api/painel/login
-# → {"error":"Senha incorreta."}
-curl -sI https://nicoliadvogados.adv.br/dashboard | grep -i x-robots   # → noindex, nofollow
-curl -s -o /dev/null -w "%{http_code}" https://nicoliadvogados.adv.br/api/painel/ga4   # → 401
+curl -s -o /dev/null -w "%{http_code}" -X POST -H 'Content-Type: text/plain' -A 'Mozilla/5.0 (iPhone)' \
+  --data '{"v":1,"sid":"0f8fad5b-d9cb-469f-a165-70867728950e","e":[]}' https://DOMINIO/api/collect   # → 204
+curl -sI https://DOMINIO/dashboard | grep -i x-robots                                               # → noindex, nofollow
 ```
-
-Depois, entrar no painel e conferir: nome da conta no bloco Google Ads = Nicoli (não M|P) e dados do GA4.

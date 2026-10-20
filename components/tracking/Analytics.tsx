@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { Coletor } from "./Coletor";
 import { ConsentBanner } from "./ConsentBanner";
 import { TrackingEvents } from "./TrackingEvents";
 import { TrackingProvider } from "./TrackingProvider";
@@ -18,6 +19,7 @@ export function Analytics() {
       <Suspense fallback={null}>
         <UTMCapture />
         <TrackingEvents />
+        <Coletor />
       </Suspense>
       <ConsentBanner />
     </>
