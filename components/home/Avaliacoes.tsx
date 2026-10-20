@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { IconeEstrela, IconeSeta } from "@/components/icons/Icones";
+import { IconeEstrela, IconeGoogle, IconeSeta } from "@/components/icons/Icones";
 import type { Avaliacao } from "@/lib/types";
 
 interface AvaliacoesProps {
@@ -41,22 +41,35 @@ export function Avaliacoes({ avaliacoes, googleUrl, resumo }: AvaliacoesProps) {
         target="_blank"
         rel="noopener noreferrer"
         data-track="click_reviews"
-        className="group/resumo mb-10 inline-flex flex-wrap items-center gap-x-6 gap-y-3 border-y border-pedra py-5"
+        className="group/resumo mb-10 inline-flex flex-wrap items-center gap-x-8 gap-y-5 border border-pedra bg-marfim px-6 py-6 shadow-[0_1px_0_rgba(0,0,0,0.02)] transition-shadow hover:shadow-[0_12px_32px_-16px_rgba(83,1,3,0.25)] sm:px-8"
       >
-        <span className="font-display text-[3.2rem] leading-none text-bordo-700">
-          {resumo.nota.toLocaleString("pt-BR", { minimumFractionDigits: 1 })}
+        <span className="flex items-center gap-4">
+          <IconeGoogle className="size-14 shrink-0 sm:size-16" />
+          <span className="leading-tight">
+            <span className="block text-[1.35rem] font-medium tracking-tight text-grafite">Google</span>
+            <span className="block text-[0.8rem] uppercase tracking-[0.18em] text-cinza">Avaliações</span>
+          </span>
         </span>
-        <span>
-          <Estrelas nota={resumo.nota} className="size-5" />
-          <span className="mt-2 block text-[0.85rem] text-cinza transition-colors group-hover/resumo:text-bordo-700">
-            {resumo.total.toLocaleString("pt-BR")} avaliações no Google
+        <span aria-hidden="true" className="hidden h-14 w-px bg-pedra sm:block" />
+        <span className="flex items-center gap-5">
+          <span className="font-display text-[3.2rem] leading-none text-bordo-700">
+            {resumo.nota.toLocaleString("pt-BR", { minimumFractionDigits: 1 })}
+          </span>
+          <span>
+            <Estrelas nota={resumo.nota} className="size-5" />
+            <span className="mt-2 block text-[0.85rem] text-cinza transition-colors group-hover/resumo:text-bordo-700">
+              {resumo.total.toLocaleString("pt-BR")} avaliações no Google
+            </span>
           </span>
         </span>
       </a>
       <ul ref={trilho} className="trilho-snap pb-2" aria-label="Avaliações de clientes no Google">
         {avaliacoes.map((a) => (
           <li key={a.autor} className="flex flex-col border border-pedra bg-marfim p-8">
-            <Estrelas nota={a.nota} className="size-4" />
+            <span className="flex items-center justify-between">
+              <Estrelas nota={a.nota} className="size-4" />
+              <IconeGoogle className="size-6" />
+            </span>
             <blockquote className="mt-6 flex-1 font-display text-[1.3rem] leading-[1.5] text-grafite">“{a.texto}”</blockquote>
             <p className="mt-8 border-t border-pedra pt-5 text-[0.875rem]">
               <span className="block text-grafite">{a.autor}</span>
