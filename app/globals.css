@@ -1,26 +1,458 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   Design System — Nicoli Sociedade de Advogados
+   Base: logo bordô (#530103) · moldura aberta · "N" em linhas paralelas
+   Documentação completa: docs/DESIGN-SYSTEM.md
+   ========================================================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Bordô — cor de autoridade (extraída da logo) */
+  --cor-bordo-950: #1c0001;
+  --cor-bordo-900: #2b0102;
+  --cor-bordo-800: #3d0102;
+  --cor-bordo-700: #530103; /* cor da marca */
+  --cor-bordo-600: #6b1416;
+  --cor-bordo-500: #872b2b;
+  --cor-bordo-300: #c9a19e;
+  --cor-bordo-100: #f3e7e4;
+
+  /* Champanhe — acento (broche "N" dourado) */
+  --cor-champanhe-700: #7d5f3d; /* único tom de champanhe aprovado p/ texto em fundo claro */
+  --cor-champanhe-500: #c4a27a;
+  --cor-champanhe-400: #d6bb96;
+  --cor-champanhe-200: #ece0cc;
+
+  /* Neutros quentes */
+  --cor-marfim: #faf7f2; /* fundo principal */
+  --cor-areia: #f2ece3; /* superfície alternada */
+  --cor-pedra: #e3dacd; /* bordas */
+  --cor-grafite: #1e1a18; /* texto principal */
+  --cor-cinza: #5c534e; /* texto secundário */
+  --cor-branco: #ffffff;
+
+  /* Semânticas */
+  --cor-primaria: var(--cor-bordo-700);
+  --cor-secundaria: var(--cor-champanhe-500);
+  --cor-fundo: var(--cor-marfim);
+  --cor-texto: var(--cor-grafite);
+  --cor-foco: var(--cor-champanhe-500);
+  --cor-whatsapp: #1f7a4d;
+
+  /* Movimento */
+  --ease-elegante: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-suave: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-rapida: 200ms;
+  --dur-media: 450ms;
+  --dur-lenta: 800ms;
+
+  /* Layout */
+  --header-h: 76px;
+  --secao-py: clamp(4.5rem, 3rem + 6vw, 9rem);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bordo-950: var(--cor-bordo-950);
+  --color-bordo-900: var(--cor-bordo-900);
+  --color-bordo-800: var(--cor-bordo-800);
+  --color-bordo-700: var(--cor-bordo-700);
+  --color-bordo-600: var(--cor-bordo-600);
+  --color-bordo-500: var(--cor-bordo-500);
+  --color-bordo-300: var(--cor-bordo-300);
+  --color-bordo-100: var(--cor-bordo-100);
+  --color-champanhe-700: var(--cor-champanhe-700);
+  --color-champanhe-500: var(--cor-champanhe-500);
+  --color-champanhe-400: var(--cor-champanhe-400);
+  --color-champanhe-200: var(--cor-champanhe-200);
+  --color-marfim: var(--cor-marfim);
+  --color-areia: var(--cor-areia);
+  --color-pedra: var(--cor-pedra);
+  --color-grafite: var(--cor-grafite);
+  --color-cinza: var(--cor-cinza);
+  --color-whatsapp: var(--cor-whatsapp);
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-jost), "Jost", system-ui, sans-serif;
+
+  --ease-elegante: var(--ease-elegante);
+
+  --text-display: clamp(2.75rem, 1.55rem + 5.2vw, 6rem);
+  --text-display--line-height: 1.02;
+  --text-h1: clamp(2.375rem, 1.6rem + 3.4vw, 4.5rem);
+  --text-h1--line-height: 1.06;
+  --text-h2: clamp(2rem, 1.5rem + 2.2vw, 3.25rem);
+  --text-h2--line-height: 1.1;
+  --text-h3: clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);
+  --text-h3--line-height: 1.25;
+  --text-lead: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  --text-lead--line-height: 1.65;
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--letter-spacing: 0.26em;
+
+  --container-site: 77.5rem; /* 1240px */
+  --container-texto: 42rem; /* ~68 caracteres */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--header-h) + 16px);
+  }
+  body {
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  em,
+  i,
+  .italic {
+    font-family: var(--font-cormorant-italico), var(--font-cormorant), Georgia, serif;
+  }
+  ::selection {
+    background: var(--cor-bordo-700);
+    color: var(--cor-marfim);
+  }
+  :focus-visible {
+    outline: 2px solid var(--cor-foco);
+    outline-offset: 3px;
+  }
+  /* Lenis */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .container-site {
+    width: 100%;
+    max-width: var(--container-site);
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container-site {
+      padding-inline: 2rem;
+    }
+  }
+  .secao {
+    padding-block: var(--secao-py);
+  }
+
+  /* Eyebrow: ecoa o "S O C I E D A D E" espaçado da logo */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: var(--text-eyebrow);
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.875rem;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 2rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.6;
+  }
+
+  /* Linhas paralelas: assinatura gráfica do "N" */
+  .linhas-paralelas {
+    height: 5px;
+    border-top: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    opacity: 0.35;
+  }
+
+  /* Moldura aberta: cantos em L da logo */
+  .moldura {
+    position: relative;
+  }
+  .moldura::before,
+  .moldura::after {
+    content: "";
+    position: absolute;
+    width: clamp(2.5rem, 8vw, 5rem);
+    height: clamp(2.5rem, 8vw, 5rem);
+    border-color: var(--moldura-cor, var(--cor-bordo-700));
+    border-style: solid;
+    pointer-events: none;
+  }
+  .moldura::before {
+    top: 0;
+    left: 0;
+    border-width: 3px 0 0 3px;
+  }
+  .moldura::after {
+    bottom: 0;
+    right: 0;
+    border-width: 0 3px 3px 0;
+  }
+
+  /* Link do menu: sublinhado que cresce da esquerda */
+  .nav-link {
+    position: relative;
+    display: inline-block;
+    padding-block: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cor-grafite);
+    transition: color var(--dur-rapida) var(--ease-elegante);
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0.2rem;
+    height: 1px;
+    width: 100%;
+    background: var(--cor-bordo-700);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--dur-media) var(--ease-elegante);
+  }
+  .nav-link:hover,
+  .nav-link-ativo {
+    color: var(--cor-bordo-700);
+  }
+  .header-claro .nav-link {
+    color: var(--cor-marfim);
+  }
+  .header-claro .nav-link::after {
+    background: var(--cor-champanhe-400);
+  }
+  .header-claro .nav-link:hover {
+    color: var(--cor-champanhe-400);
+  }
+  .nav-link:hover::after,
+  .nav-link-ativo::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  /* Grão sutil para superfícies bordô (atmosfera, sem imagem extra) */
+  .grao {
+    position: relative;
+    isolation: isolate;
+  }
+  .grao::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.18;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  }
+
+  /* Hero: entrada sem esconder o conteúdo (não atrasa o LCP) */
+  @keyframes subir-suave {
+    from {
+      transform: translate3d(0, 18px, 0);
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  @keyframes linha-cresce {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  @keyframes zoom-lento {
+    from {
+      transform: scale(1.06);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  @keyframes indicador-desce {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(200%);
+    }
+  }
+  .indicador-scroll {
+    animation: indicador-desce 1.8s var(--ease-suave) infinite;
+  }
+  .entrada-hero {
+    animation: subir-suave 900ms var(--ease-elegante) both;
+  }
+  .linha-hero {
+    transform-origin: left;
+    animation: linha-cresce 1200ms var(--ease-elegante) 200ms both;
+  }
+  .zoom-hero {
+    animation: zoom-lento 2400ms var(--ease-elegante) both;
+  }
+
+  /* Itens de painel de abas: entrada escalonada ao trocar de aba */
+  @keyframes painel-entra {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 14px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  [role="tabpanel"]:not([hidden]) .painel-item {
+    animation: painel-entra 600ms var(--ease-elegante) both;
+  }
+
+  /* Carrossel com scroll-snap (sem JS para rolar; JS só nos botões) */
+  .trilho-snap {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min(86%, 26rem);
+    gap: 1.25rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+  .trilho-snap::-webkit-scrollbar {
+    display: none;
+  }
+  .trilho-snap > * {
+    scroll-snap-align: start;
+  }
+
+  /* Linha do tempo do método: trilho que se preenche conforme o scroll */
+  .metodo-trilho {
+    position: absolute;
+    left: 21px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--cor-pedra);
+  }
+  .metodo-trilho::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--cor-bordo-700);
+    transform-origin: top;
+    transform: scaleY(1);
+  }
+  @supports (animation-timeline: view()) {
+    .metodo-trilho::after {
+      transform: scaleY(0);
+      animation: trilho-preenche linear both;
+      animation-timeline: view();
+      animation-range: entry 30% cover 65%;
+    }
+    @keyframes trilho-preenche {
+      to {
+        transform: scaleY(1);
+      }
+    }
+  }
+
+  /* Texto corrido de artigos e páginas legais */
+  .prosa {
+    max-width: var(--container-texto);
+    color: var(--cor-grafite);
+  }
+  .prosa > * + * {
+    margin-top: 1.15em;
+  }
+  .prosa h2 {
+    font-size: var(--text-h3);
+    line-height: 1.25;
+    margin-top: 2.2em;
+    color: var(--cor-bordo-700);
+  }
+  .prosa h3 {
+    font-size: 1.3rem;
+    margin-top: 1.8em;
+  }
+  .prosa a {
+    color: var(--cor-bordo-700);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prosa ul,
+  .prosa ol {
+    padding-left: 1.25rem;
+  }
+  .prosa ul {
+    list-style: square;
+  }
+  .prosa ol {
+    list-style: decimal;
+  }
+  .prosa li + li {
+    margin-top: 0.4em;
+  }
+  .prosa li::marker {
+    color: var(--cor-champanhe-700);
+  }
+  .prosa blockquote {
+    border-left: 3px solid var(--cor-bordo-700);
+    padding-left: 1.25rem;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    line-height: 1.45;
+  }
+  .prosa img {
+    width: 100%;
+    height: auto;
+  }
+  .prosa table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  .prosa th,
+  .prosa td {
+    border-bottom: 1px solid var(--cor-pedra);
+    padding: 0.6rem 0.5rem;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
