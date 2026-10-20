@@ -2,6 +2,7 @@ import { IconeEmail, IconeLocal, IconeRelogio, IconeTelefone, IconeWhatsApp } fr
 import { LeadForm } from "@/components/lead/LeadForm";
 import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 import { FotoLateral } from "@/components/shared/FotoLateral";
+import { MapaEscritorio } from "@/components/shared/MapaEscritorio";
 import { FOTO_PAGINA } from "@/lib/fotos-site";
 import { FaqLista } from "@/components/shared/FaqLista";
 import { Reveal } from "@/components/ui/Reveal";
@@ -100,13 +101,7 @@ export default function ContatoPage() {
       </section>
 
       <section aria-label="Mapa" data-section="contato-mapa">
-        <iframe
-          title="Mapa: Nicoli Sociedade de Advogados, Rua 89, 240, Setor Sul, Goiânia"
-          src="https://www.google.com/maps?q=Rua+89,+240,+Setor+Sul,+Goi%C3%A2nia+-+GO,+74093-140&output=embed"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          className="block h-[420px] w-full border-0 grayscale-[0.6] sepia-[0.15]"
-        />
+        <MapaEscritorio />
       </section>
 
       <section className="secao" data-section="contato-faq" aria-labelledby="faq-contato">

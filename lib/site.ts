@@ -22,7 +22,11 @@ export const SITE = {
   telefone: { exibicao: "(62) 3412-2828", e164: "+556234122828" },
   whatsapp: { exibicao: "(62) 99570-0037", numero: "5562995700037" },
   email: "luis.gustavo@nicoliadvogados.adv.br",
-  mapsUrl: "https://www.google.com/maps/search/?api=1&query=Rua+89+240+Setor+Sul+Goi%C3%A2nia+GO+74093-140",
+  mapsUrl:
+    "https://www.google.com/maps/search/?api=1&query=Nicoli+Sociedade+de+Advogados+Rua+89+240+Setor+Sul+Goi%C3%A2nia+GO+74093-140",
+  /** Embed sem chave de API; a busca pelo nome faz o pin abrir o perfil do escritório no Google. */
+  mapsEmbedUrl:
+    "https://www.google.com/maps?q=Nicoli+Sociedade+de+Advogados,+Rua+89,+240,+Setor+Sul,+Goi%C3%A2nia+-+GO,+74093-140&hl=pt-BR&z=16&output=embed",
   googleReviewsUrl:
     process.env.NEXT_PUBLIC_GOOGLE_REVIEWS_URL ??
     "https://www.google.com/search?q=Nicoli+Sociedade+de+Advogados+Goi%C3%A2nia",

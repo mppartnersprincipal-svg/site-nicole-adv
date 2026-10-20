@@ -8,18 +8,19 @@ import { SequenciaFixada } from "@/components/motion/SequenciaFixada";
 import { TextoAnimado } from "@/components/motion/TextoAnimado";
 import { Avaliacoes } from "@/components/home/Avaliacoes";
 import { HeroHome } from "@/components/home/HeroHome";
-import { IconeSetaDiagonal } from "@/components/icons/Icones";
+import { IconeLocal, IconeRelogio, IconeSetaDiagonal } from "@/components/icons/Icones";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CredenciaisFaixa } from "@/components/shared/CredenciaisFaixa";
 import { CtaFinal } from "@/components/shared/CtaFinal";
 import { FaqLista } from "@/components/shared/FaqLista";
+import { MapaEscritorio } from "@/components/shared/MapaEscritorio";
 import { MembroCard } from "@/components/shared/MembroCard";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getPosts } from "@/lib/blog";
 import { AREAS_EMPRESAS, AREAS_PESSOAS } from "@/lib/content/areas";
-import { AVALIACOES } from "@/lib/content/avaliacoes";
+import { AVALIACOES, RESUMO_GOOGLE } from "@/lib/content/avaliacoes";
 import { COORDENADORES, SOCIOS } from "@/lib/content/equipe";
 import {
   HOME_AREAS,
@@ -252,12 +253,45 @@ export default async function HomePage() {
           <SectionHeading eyebrow={HOME_DEPOIMENTOS.eyebrow} titulo={HOME_DEPOIMENTOS.titulo} texto={HOME_DEPOIMENTOS.intro} id="avaliacoes-titulo" efeito="escala" />
           <Reveal className="mt-14">
             {avaliacoesReais.length > 0 ? (
-              <Avaliacoes avaliacoes={avaliacoesReais} googleUrl={SITE.googleReviewsUrl} />
+              <Avaliacoes avaliacoes={avaliacoesReais} googleUrl={SITE.googleReviewsUrl} resumo={RESUMO_GOOGLE} />
             ) : (
               <Button href={SITE.googleReviewsUrl} variante="contorno" trackEvent="click_reviews">
                 Ver avaliações no Google
               </Button>
             )}
+          </Reveal>
+
+          {/* LOCALIZAÇÃO */}
+          <Reveal className="mt-20 grid border border-pedra bg-marfim lg:grid-cols-[0.42fr_0.58fr]">
+            <div className="flex flex-col justify-center gap-8 p-8 sm:p-10">
+              <div>
+                <p className="eyebrow mb-4 text-champanhe-700">Onde estamos</p>
+                <h3 className="text-[1.9rem] leading-tight text-bordo-700">Sede em Goiânia</h3>
+              </div>
+              <address className="grid gap-5 not-italic text-cinza">
+                <p className="flex gap-3">
+                  <IconeLocal className="mt-1 size-5 shrink-0 text-bordo-700" />
+                  <span>
+                    <span className="block text-grafite">{SITE.endereco.rua}</span>
+                    {SITE.endereco.bairro}, {SITE.endereco.cidade}/{SITE.endereco.uf} · CEP {SITE.endereco.cep}
+                  </span>
+                </p>
+                <p className="flex gap-3">
+                  <IconeRelogio className="mt-1 size-5 shrink-0 text-bordo-700" />
+                  <span>{SITE.horario}</span>
+                </p>
+              </address>
+              <a
+                href={SITE.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track="click_maps"
+                className="text-[0.85rem] text-bordo-700 underline underline-offset-4"
+              >
+                Como chegar pelo Google Maps
+              </a>
+            </div>
+            <MapaEscritorio className="h-[320px] lg:h-full lg:min-h-[400px]" />
           </Reveal>
         </div>
       </section>
