@@ -1,12 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Jost } from "next/font/google";
-import { Footer } from "@/components/layout/Footer";
-import { Header } from "@/components/layout/Header";
-import { SmoothScroll } from "@/components/layout/SmoothScroll";
-import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
-import { JsonLd } from "@/components/seo/JsonLd";
-import { Analytics } from "@/components/tracking";
-import { grafo, schemaOrganizacao, schemaWebsite } from "@/lib/schema";
 import { SITE } from "@/lib/site";
 import "./globals.css";
 
@@ -64,13 +57,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <noscript>
           <style>{"[data-reveal]{opacity:1!important;transform:none!important}"}</style>
         </noscript>
-        <Header />
-        <main id="conteudo">{children}</main>
-        <Footer />
-        <WhatsAppFloat />
-        <SmoothScroll />
-        <Analytics />
-        <JsonLd data={grafo(schemaOrganizacao(), schemaWebsite())} />
+        {/* Header, rodapé e medição ficam em SiteChrome (app/(site)/layout.tsx): o /dashboard não os carrega */}
+        {children}
       </body>
     </html>
   );

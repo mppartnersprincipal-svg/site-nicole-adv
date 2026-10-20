@@ -37,13 +37,18 @@ Site institucional full service (11 áreas de atuação, cada uma como página d
 
 ```
 app/
-  page.tsx                        Home
-  areas-de-atuacao/[slug]/        11 páginas de área (landing pages de Ads)
-  quem-somos/ + [slug]/           Escritório, sócios, conselho + perfil de cada advogado
-  blog/ + [slug]/                 442 posts MDX
-  contato/  politica-de-privacidade/  lgpd-dados-pessoais/
+  layout.tsx                      Raiz: só html/body/fontes (o chrome do site fica no SiteChrome)
+  not-found.tsx                   404 (envolve SiteChrome)
+  (site)/layout.tsx               SiteChrome: header, rodapé, WhatsApp, GTM + banner LGPD, schema
+  (site)/page.tsx                 Home
+  (site)/areas-de-atuacao/[slug]/ 11 páginas de área (landing pages de Ads)
+  (site)/quem-somos/ + [slug]/    Escritório, sócios, conselho + perfil de cada advogado
+  (site)/blog/ + [slug]/          442 posts MDX
+  (site)/contato/  politica-de-privacidade/  lgpd-dados-pessoais/
+  (painel)/dashboard/             Painel GA4 + Google Ads (noindex, SEM GTM) — docs/DASHBOARD.md
+  api/painel/                     login, ga4, google-ads (rotas protegidas por sessão)
   sitemap.ts  robots.ts  llms.txt/  opengraph-image.tsx
-components/  brand/ home/ area/ lead/ layout/ shared/ ui/ icons/ seo/ tracking/
+components/  brand/ home/ area/ lead/ layout/ shared/ ui/ icons/ seo/ tracking/ painel/
 lib/
   content/        TODA a copy (áreas, home, sobre, equipe, avaliações, legal)
   site.ts         NAP e dados institucionais (fonte única)
@@ -52,10 +57,11 @@ lib/
   images.ts       manifesto das fotos (gerado)   fotos-site.ts  curadoria por seção
   blog.ts         leitura do MDX ("use cache")
   tracking.ts  attribution-core.ts  whatsapp.ts
+  painel/         dashboard: auth, período, GA4 Data API, Google Ads API, formatação
 content/blog/     *.mdx + _redirects.json (1.017 URLs antigas → novas)
 proxy.ts          redirects 301 do site antigo (Map O(1))
 gtm/              container GTM gerado + TRACKING.md
-docs/             DESIGN-SYSTEM.md, briefing.txt, redirects-mapeamento.md
+docs/             DESIGN-SYSTEM.md, DASHBOARD.md, briefing.txt, redirects-mapeamento.md
 ```
 
 ---
@@ -77,8 +83,8 @@ Ver `docs/DESIGN-SYSTEM.md`. Resumo: claro editorial; bordô `#530103` (logo), c
 
 ```bash
 npm run dev      # http://localhost:3000
-npm run build    # build de produção (478 páginas estáticas)
-npm test         # 58 testes de tracking/WhatsApp (node:test)
+npm run build    # build de produção (482 rotas)
+npm test         # 119 testes: tracking/WhatsApp + painel (node:test, sem chamadas reais)
 node gtm/gen-container.mjs   # regenera o container GTM com IDs do .env.local
 ```
 
@@ -90,6 +96,13 @@ Implementado conforme padrão MP — detalhes em `gtm/TRACKING.md`.
 - Conversão primária Google Ads: `generate_lead` (formulário → WhatsApp). Secundárias: `click_whatsapp`, `click_phone`.
 - Consent Mode v2 (default negado) + banner LGPD. Captura de UTMs/gclid/gbraid/wbraid (first e last touch).
 - Variáveis: `NEXT_PUBLIC_GTM_ID`, `NEXT_PUBLIC_GA4_ID`, `NEXT_PUBLIC_GOOGLE_ADS_ID`, `NEXT_PUBLIC_META_PIXEL_ID`, `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_GOOGLE_REVIEWS_URL` (ver `.env.example`).
+
+## Painel (`/dashboard`)
+
+GA4 (Data API) + Google Ads (API via MCC), só leitura, login por senha — ver `docs/DASHBOARD.md`.
+- Fica fora de `app/(site)`: **nunca** colocar o `SiteChrome`/GTM nele (contaria as visitas da equipe no GA4).
+- Variáveis só de servidor: `DASHBOARD_PASSWORD`, `DASHBOARD_SECRET`, `GA4_PROPERTY_ID`, `GOOGLE_SERVICE_ACCOUNT_JSON`, `GOOGLE_ADS_*`.
+- Página nova do site vai em `app/(site)/`, senão fica sem header/rodapé/GTM.
 
 ---
 

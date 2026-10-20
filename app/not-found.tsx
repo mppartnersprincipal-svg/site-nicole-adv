@@ -1,11 +1,14 @@
 import Link from "next/link";
+import { SiteChrome } from "@/components/layout/SiteChrome";
 import { FotoHero } from "@/components/shared/FotoHero";
 import { Button } from "@/components/ui/Button";
 import { FOTO_PAGINA } from "@/lib/fotos-site";
 import { AREAS_NAV, rotaArea } from "@/lib/nav";
 
+// Renderiza só dentro do layout raiz (fora de app/(site)), por isso traz a moldura do site
 export default function NotFound() {
   return (
+    <SiteChrome>
     <section className="relative overflow-hidden bg-areia pb-24 pt-[calc(var(--header-h)+4rem)]">
       <div className="container-site relative grid gap-14 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:gap-20">
         <div>
@@ -30,5 +33,6 @@ export default function NotFound() {
         <FotoHero foto={FOTO_PAGINA.naoEncontrada} />
       </div>
     </section>
+    </SiteChrome>
   );
 }

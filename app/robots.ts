@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/site";
 
-const BLOQUEADO = ["/api/"];
+const BLOQUEADO = ["/api/", "/dashboard"];
 
 /**
  * Buscadores e assistentes de IA liberados (GEO). AI Overviews usam o Googlebot comum;
