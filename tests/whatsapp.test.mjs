@@ -73,7 +73,7 @@ describe("buildLeadMessage", () => {
 
   test("monta mensagem legível com campos e telefone formatado", () => {
     const msg = wa.buildLeadMessage(dados, {});
-    assert.match(msg, /^Olá! Vim pelo site da Nicoli Advogados/);
+    assert.match(msg, /^Olá! Vim pelo site da Nicoli Sociedade de Advogados/);
     assert.match(msg, /\*Nome:\* Maria Souza/);
     assert.match(msg, /\*Telefone:\* \(62\) 99999-1234/);
     assert.match(msg, /\*E-mail:\* maria\.souza@empresa\.com\.br/);
@@ -121,7 +121,7 @@ describe("buildWhatsAppUrl", () => {
 
   test("mensagem vazia cai na mensagem padrão", () => {
     const texto = new URL(wa.buildWhatsAppUrl({ mensagem: "   " })).searchParams.get("text");
-    assert.match(texto, /Nicoli Advogados/);
+    assert.match(texto, /Nicoli Sociedade de Advogados/);
   });
 });
 

@@ -184,7 +184,7 @@ export default async function AreaPage({ params }: PageProps<"/areas-de-atuacao/
             <SectionHeading
               eyebrow="Método Nicoli"
               titulo="Como o escritório atua"
-              texto="Toda peça passa pelo advogado responsável, por um revisor colega e pela liberação final do sócio."
+              texto="Toda peça passa pelo advogado relator, por um revisor colega e pela liberação final do sócio."
               id="metodo-titulo"
              efeito="inclinado" />
           </div>

@@ -54,7 +54,7 @@ export const area: AreaAtuacao = {
     },
     {
       titulo: "Autoridade técnica",
-      descricao: "Sócio-fundador mestre em Direito do Trabalho, com mais de 23 anos de advocacia.",
+      descricao: "Sócio-fundador mestre em Direito do Trabalho, com mais de 23 anos de advocacia trabalhista.",
     },
     {
       titulo: "Todas as instâncias",

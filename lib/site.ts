@@ -36,9 +36,10 @@ export const SITE = {
     facebook: "https://facebook.com/nicoliadv",
     tiktok: "https://tiktok.com/@nicoliadv",
     youtube: "https://youtube.com/@nicoliadv",
+    kwai: "https://kwai.com/nicoliadv",
   },
   dpo: { nome: "Luis Gustavo Nicoli", email: "luis.gustavo@nicoliadvogados.adv.br" },
 } as const;
 
 export const MENSAGEM_WHATSAPP_PADRAO =
-  "Olá! Vim pelo site da Nicoli Advogados e gostaria de agendar uma conversa.";
+  "Olá! Vim pelo site da Nicoli Sociedade de Advogados e gostaria de agendar uma reunião.";

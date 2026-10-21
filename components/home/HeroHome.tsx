@@ -68,6 +68,8 @@ export function HeroHome({ hero, fundo, destaque, whatsappUrl }: HeroHomeProps) 
             <p className="eyebrow mb-7 text-champanhe-400 max-md:hidden">{hero.eyebrow}</p>
             <h1 id="hero-titulo" className="text-[clamp(2.4rem,1.45rem+3.2vw,4.75rem)] leading-[1.04] text-marfim">
               {hero.titulo}
+              <br />
+              <em className="font-display italic text-champanhe-400">{hero.slogan}</em>
             </h1>
             <div className="linhas-paralelas linha-hero mt-9 w-24 text-champanhe-400 !opacity-80" aria-hidden="true" />
             <p className="mt-8 max-w-xl text-lead text-marfim/85">{hero.subtitulo}</p>

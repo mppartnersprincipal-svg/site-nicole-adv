@@ -10,7 +10,7 @@ import { metaPagina } from "@/lib/seo";
 import { MENSAGEM_WHATSAPP_PADRAO, SITE } from "@/lib/site";
 
 export const metadata = metaPagina({
-  title: "Contato: agende uma conversa",
+  title: "Contato: agende uma reunião",
   description:
     "Fale com a Nicoli Sociedade de Advogados: Rua 89, nº 240, Setor Sul, Goiânia/GO. WhatsApp (62) 99570-0037 e telefone (62) 3412-2828. Atendimento presencial e online.",
   path: "/contato",

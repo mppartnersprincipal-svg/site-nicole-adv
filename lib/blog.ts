@@ -16,6 +16,8 @@ export interface PostMeta {
   author: string;
   category?: string;
   area?: string;
+  /** Outras áreas em cuja página o artigo também aparece. */
+  areasExtras?: string[];
   cover?: string;
   coverAlt?: string;
   minutos: number;
@@ -45,6 +47,7 @@ async function lerPost(arquivo: string): Promise<(Post & { draft: boolean }) | n
     author: String(data.author ?? "Luís Gustavo Nicoli"),
     category: data.category ? String(data.category) : undefined,
     area: data.area ? String(data.area) : undefined,
+    areasExtras: Array.isArray(data.areasExtras) ? data.areasExtras.map(String) : undefined,
     cover: data.cover ? String(data.cover) : undefined,
     coverAlt: data.coverAlt ? String(data.coverAlt) : undefined,
     minutos: tempoLeitura(content),
@@ -85,5 +88,5 @@ export async function getPost(slug: string): Promise<Post | null> {
 
 export async function getPostsPorArea(area: string): Promise<PostMeta[]> {
   const posts = await getPosts();
-  return posts.filter((p) => p.area === area);
+  return posts.filter((p) => p.area === area || p.areasExtras?.includes(area));
 }

@@ -68,7 +68,7 @@ export default async function HomePage() {
         <CredenciaisFaixa itens={HOME_CREDENCIAIS} className="border-t-0" />
       </div>
 
-      {/* MANIFESTO — "Técnica de quem advoga. Visão de quem empreende." */}
+      {/* MANIFESTO — frase do site atual citada no briefing (o slogan foi para o hero) */}
       <section className="secao" data-section="home-manifesto" aria-labelledby="manifesto-titulo">
         <CenaGsap className="container-site grid items-center gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
           <Reveal className="relative order-2 lg:order-1">
@@ -100,9 +100,9 @@ export default async function HomePage() {
               efeito="mascara"
               className="text-[clamp(2.25rem,1.5rem+3.2vw,4.25rem)] leading-[1.05] text-bordo-700"
             >
-              Técnica de quem advoga.
+              Tradição e modernidade
               <br />
-              <em className="font-display italic text-champanhe-700">Visão de quem empreende.</em>
+              <em className="font-display italic text-champanhe-700">a serviço dos nossos clientes.</em>
             </TextoAnimado>
             {/* Palavras acendem conforme o scroll (leitura guiada) */}
             <div className="mt-10 space-y-6 text-lead text-cinza">
@@ -245,7 +245,7 @@ export default async function HomePage() {
       </section>
 
       {/* ESTRUTURA — galeria horizontal guiada pelo scroll (GSAP) */}
-      {GALERIA.length > 0 && <GaleriaHorizontal fotos={GALERIA} eyebrow="Nosso escritório" titulo="Um ambiente pensado para receber bem" />}
+      {GALERIA.length > 0 && <GaleriaHorizontal fotos={GALERIA} eyebrow="Nosso escritório" titulo="Sede em Goiânia, no Setor Sul" />}
 
       {/* AVALIAÇÕES */}
       <section className="secao bg-areia" data-section="home-avaliacoes" aria-labelledby="avaliacoes-titulo">

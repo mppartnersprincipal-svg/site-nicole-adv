@@ -142,7 +142,7 @@ export function buildLeadMessage(dados: LeadForm, atribuicao?: Attribution): str
   const attr = atribuicao ?? getAttribution();
   const area = limparTexto(dados.area) || "Geral";
   const linhas: string[] = [
-    "Olá! Vim pelo site da Nicoli Advogados e gostaria de agendar uma conversa.",
+    "Olá! Vim pelo site da Nicoli Sociedade de Advogados e gostaria de agendar uma reunião.",
     "",
     `*Nome:* ${limparTexto(dados.nome)}`,
     `*Telefone:* ${formatarTelefoneBR(limparTexto(dados.telefone))}`,

@@ -4,6 +4,7 @@ import {
   IconeEmail,
   IconeFacebook,
   IconeInstagram,
+  IconeKwai,
   IconeLinkedin,
   IconeLocal,
   IconeRelogio,
@@ -22,6 +23,7 @@ const REDES = [
   { href: SITE.redes.facebook, label: "Facebook", Icone: IconeFacebook },
   { href: SITE.redes.youtube, label: "YouTube", Icone: IconeYoutube },
   { href: SITE.redes.tiktok, label: "TikTok", Icone: IconeTiktok },
+  { href: SITE.redes.kwai, label: "Kwai", Icone: IconeKwai },
 ];
 
 const INSTITUCIONAL = [
@@ -44,7 +46,7 @@ export function Footer() {
               <LogoHorizontal className="h-20 w-auto" />
             </Link>
             <p className="mt-6 max-w-xs font-display text-2xl leading-snug text-marfim">{SITE.slogan}</p>
-            <ul className="mt-8 flex gap-1" aria-label="Redes sociais">
+            <ul className="mt-8 flex flex-wrap gap-1" aria-label="Redes sociais">
               {REDES.map(({ href, label, Icone }) => (
                 <li key={label}>
                   <a

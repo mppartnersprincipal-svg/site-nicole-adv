@@ -9,7 +9,7 @@ export const area: AreaAtuacao = {
   seo: {
     title: "Advogado Empresarial em Goiânia | Nicoli Advogados",
     description:
-      "Advogado empresarial em Goiânia: contratos, conflitos entre sócios, recuperação de créditos e defesa de empresas. Atuação em todo o Brasil. Agende uma conversa.",
+      "Advogado empresarial em Goiânia: contratos, conflitos entre sócios, recuperação de créditos e defesa de empresas. Atuação em todo o Brasil. Agende uma reunião.",
     keywords: [
       "advogado empresarial goiânia",
       "advocacia empresarial goiânia",

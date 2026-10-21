@@ -9,7 +9,7 @@ export const area: AreaAtuacao = {
   seo: {
     title: "Advogado Tributarista em Goiânia | Nicoli Advogados",
     description:
-      "Advogado tributarista em Goiânia: planejamento tributário, recuperação de tributos, defesa em autuações, reforma tributária e ITCMD. Agende uma conversa.",
+      "Advogado tributarista em Goiânia: planejamento tributário, recuperação de tributos, defesa em autuações, reforma tributária e ITCMD. Agende uma reunião.",
     keywords: [
       "advogado tributarista goiânia",
       "advogado tributário goiânia",
@@ -70,7 +70,7 @@ export const area: AreaAtuacao = {
   mensagemWhatsapp:
     "Olá! Vim pelo site e gostaria de falar com um especialista em Direito Tributário.",
   ctaFinal: {
-    titulo: "Pague o tributo certo e decida com segurança",
+    titulo: "Decida com segurança sobre a sua situação fiscal",
     texto: "Conte brevemente a situação fiscal e agende uma reunião.",
   },
 };

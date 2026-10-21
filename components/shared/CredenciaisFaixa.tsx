@@ -4,8 +4,8 @@ import { cn } from "@/lib/utils";
 const CREDENCIAIS = [
   { valor: "23+", rotulo: "anos de advocacia trabalhista do sócio-fundador" },
   { valor: "Mestre", rotulo: "em Direito do Trabalho" },
-  { valor: "11", rotulo: "áreas de atuação com núcleos especializados" },
-  { valor: "Brasil", rotulo: "atuação em todo o território nacional" },
+  { valor: "11", rotulo: "áreas de atuação" },
+  { valor: "Brasil", rotulo: "atuação em todo o Brasil" },
 ];
 
 interface CredenciaisFaixaProps {

@@ -9,7 +9,7 @@ export const area: AreaAtuacao = {
   seo: {
     title: "Holding Familiar e Patrimonial em Goiânia | Nicoli",
     description:
-      "Holding familiar e patrimonial em Goiânia: planejamento sucessório, acordo de sócios, reorganização societária e governança familiar. Agende uma conversa.",
+      "Holding familiar e patrimonial em Goiânia: planejamento sucessório, acordo de sócios, reorganização societária e governança familiar. Agende uma reunião.",
     keywords: [
       "holding familiar goiânia",
       "holding patrimonial goiânia",
@@ -26,7 +26,7 @@ export const area: AreaAtuacao = {
     titulo: "Holding familiar e planejamento societário em Goiânia",
     subtitulo:
       "Organize empresas e patrimônio, prepare a sucessão e previna conflitos familiares com uma estrutura desenhada para a sua família e o seu negócio.",
-    cta: "Agendar uma conversa",
+    cta: "Agendar uma reunião",
   },
   resumo:
     "Na Nicoli Sociedade de Advogados, o planejamento societário atende empresários, sócios e famílias com patrimônio na constituição e reorganização de sociedades, em holdings familiares e patrimoniais, acordos de sócios e quotistas, planejamento sucessório empresarial e governança familiar. O trabalho inclui o estudo de cenários jurídicos e tributários. Sede em Goiânia e atuação em todo o Brasil.",

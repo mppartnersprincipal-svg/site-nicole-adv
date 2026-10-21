@@ -35,6 +35,7 @@ export const POLITICA_PRIVACIDADE: SecaoLegal[] = [
     itens: [
       "Dados informados por você no formulário de contato: nome, telefone, e-mail, empresa, ramo de atividade, cargo e resumo do caso.",
       "Dados de navegação coletados por cookies e tecnologias semelhantes, quando autorizados: páginas visitadas, tempo de permanência, tipo de dispositivo, navegador, localização aproximada e origem do acesso, incluindo parâmetros de campanha (UTM).",
+      "Dados estatísticos de navegação, coletados de forma anônima pelo próprio site, sem cookies e sem gravar o endereço IP: páginas visitadas, tempo de permanência, rolagem, cliques em links e botões, origem do acesso (incluindo parâmetros de campanha), tipo de dispositivo, navegador e localização aproximada (cidade, estado e país).",
       "Dados trocados em conversas pelo WhatsApp, por e-mail ou por telefone, quando você entra em contato.",
     ],
   },
@@ -54,6 +55,7 @@ export const POLITICA_PRIVACIDADE: SecaoLegal[] = [
       "Prestar os serviços jurídicos contratados: execução de contrato e exercício regular de direitos em processo judicial, administrativo ou arbitral (art. 7º, V e VI).",
       "Cumprir obrigações legais e regulatórias, inclusive as da OAB: cumprimento de obrigação legal ou regulatória (art. 7º, II).",
       "Medir a audiência do site e melhorar a experiência de navegação: consentimento (art. 7º, I), coletado pelo banner de cookies.",
+      "Gerar estatísticas anônimas de uso do site e avaliar o desempenho das campanhas, pela medição própria descrita no item 6: legítimo interesse (art. 7º, IX), sem identificar o visitante.",
       "Exibir anúncios e medir campanhas de marketing: consentimento (art. 7º, I), coletado pelo banner de cookies.",
     ],
   },
@@ -68,6 +70,7 @@ export const POLITICA_PRIVACIDADE: SecaoLegal[] = [
       "Google Analytics 4: mede o uso do site de forma estatística, como páginas visitadas e origem do acesso.",
       "Google Ads: mede a efetividade de anúncios e permite exibir anúncios relevantes a quem já visitou o site.",
       "Meta Pixel: mede campanhas no Facebook e no Instagram e permite exibir anúncios a públicos semelhantes.",
+      "Medição própria do site: registra de forma anônima as visitas e interações descritas no item 3, sem cookies e sem gravar o endereço IP. Usa um identificador aleatório de sessão, guardado no armazenamento temporário do navegador e apagado quando a aba é fechada. Somente se você aceitar os cookies de análise, um identificador aleatório de visitante fica guardado no navegador por até 13 meses, para distinguir visitas novas de recorrentes; recusar ou retirar o consentimento o apaga na hora.",
     ],
   },
   {
@@ -76,7 +79,7 @@ export const POLITICA_PRIVACIDADE: SecaoLegal[] = [
       "Não vendemos dados pessoais. O compartilhamento ocorre apenas quando necessário e com os seguintes destinatários:",
     ],
     itens: [
-      "Provedores de tecnologia que viabilizam o site, a comunicação e a medição de audiência, como Google, Meta (incluindo o WhatsApp) e a empresa de hospedagem.",
+      "Provedores de tecnologia que viabilizam o site, a comunicação e a medição de audiência, como Google, Meta (incluindo o WhatsApp), a empresa de hospedagem e o provedor de banco de dados que armazena as estatísticas anônimas de navegação.",
       "Ferramentas internas de atendimento e gestão de relacionamento usadas pelo escritório.",
       "Órgãos do Poder Judiciário, da administração pública e outras partes, quando necessário à prestação do serviço jurídico ou por obrigação legal.",
     ],
@@ -84,13 +87,13 @@ export const POLITICA_PRIVACIDADE: SecaoLegal[] = [
   {
     titulo: "8. Transferência internacional",
     paragrafos: [
-      "Alguns fornecedores, como Google e Meta, podem armazenar e processar dados em servidores fora do Brasil. Nesses casos, a transferência observa o art. 33 da LGPD e as garantias contratuais oferecidas por esses fornecedores.",
+      "Alguns fornecedores, como Google, Meta e os provedores de hospedagem e de banco de dados, podem armazenar e processar dados em servidores fora do Brasil. Nesses casos, a transferência observa o art. 33 da LGPD e as garantias contratuais oferecidas por esses fornecedores.",
     ],
   },
   {
     titulo: "9. Por quanto tempo guardamos os dados",
     paragrafos: [
-      "Os dados de contato que não resultem em contratação são mantidos pelo tempo necessário ao atendimento e, depois, eliminados ou anonimizados. Os dados de clientes são mantidos durante a prestação do serviço e pelos prazos exigidos em lei ou necessários ao exercício regular de direitos. Os dados de navegação seguem os prazos de retenção configurados nas ferramentas de análise e publicidade.",
+      "Os dados de contato que não resultem em contratação são mantidos pelo tempo necessário ao atendimento e, depois, eliminados ou anonimizados. Os dados de clientes são mantidos durante a prestação do serviço e pelos prazos exigidos em lei ou necessários ao exercício regular de direitos. Os dados de navegação seguem os prazos de retenção configurados nas ferramentas de análise e publicidade. As estatísticas anônimas da medição própria são mantidas por até 13 meses e, depois, eliminadas.",
     ],
   },
   {
@@ -162,6 +165,7 @@ export const LGPD_DADOS: SecaoLegal[] = [
     titulo: "Cookies e preferências",
     paragrafos: [
       "Ferramentas de análise e publicidade, como Google Analytics 4, Google Ads e Meta Pixel, gerenciadas pelo Google Tag Manager, só são ativadas com o seu consentimento, por meio do Modo de Consentimento do Google. Você pode rever sua escolha a qualquer momento pelo link de preferências de cookies no rodapé do site.",
+      "O site também faz uma medição própria e anônima de visitas e interações, sem cookies e sem gravar o endereço IP, para gerar estatísticas de uso. Os detalhes estão no item 6 da Política de Privacidade.",
     ],
   },
 ];

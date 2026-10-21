@@ -170,6 +170,16 @@ export function IconeYoutube(props: IconeProps) {
   );
 }
 
+export function IconeKwai(props: IconeProps) {
+  return (
+    <Base {...props}>
+      <rect x="3" y="7" width="13" height="11" rx="3" />
+      <path d="m16 11 5-3v9l-5-3" />
+      <circle cx="9.5" cy="12.5" r="2.5" />
+    </Base>
+  );
+}
+
 export function IconeTiktok(props: IconeProps) {
   return (
     <Base {...props}>

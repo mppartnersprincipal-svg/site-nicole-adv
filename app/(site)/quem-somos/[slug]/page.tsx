@@ -84,7 +84,7 @@ export default async function MembroPage({ params }: PageProps<"/quem-somos/[slu
       </section>
       <CtaFinal
         titulo={`Fale com o núcleo de ${m.nome.split(" ")[0]}`}
-        texto="Conte brevemente o seu caso e agende uma conversa com a equipe responsável."
+        texto="Conte brevemente o seu caso e agende uma reunião com a equipe responsável."
         local="membro-cta"
       />
       <JsonLd data={grafo(schemaPessoa(m))} />

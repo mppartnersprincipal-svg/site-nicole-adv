@@ -49,7 +49,7 @@ export const NOSSO_ESCRITORIO: PaginaEscritorio = {
   subtitulo:
     "Profundidade técnica e experiência empresarial para proteger empresas, patrimônios e famílias.",
   historia: {
-    eyebrow: "Nossa história",
+    eyebrow: "Posicionamento",
     titulo: "Técnica de quem advoga. Visão de quem empreende.",
     paragrafos: [
       "A Nicoli Sociedade de Advogados tem como sócio-fundador Luís Gustavo Nicoli, com mais de 23 anos de advocacia trabalhista e mestre em Direito do Trabalho.",

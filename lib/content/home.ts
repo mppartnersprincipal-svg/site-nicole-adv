@@ -11,6 +11,8 @@ export interface Cta {
 export interface HomeHero {
   eyebrow: string;
   titulo: string;
+  /** Segunda linha do h1, em itálico champanhe. */
+  slogan: string;
   subtitulo: string;
   ctaPrimario: Cta;
   ctaSecundario: Cta;
@@ -74,24 +76,25 @@ export const HOME_SEO = {
 } as const;
 
 export const HOME_HERO: HomeHero = {
-  eyebrow: "Nicoli Sociedade de Advogados · Goiânia/GO",
-  titulo: "Escritório de advocacia em Goiânia para empresas, patrimônios e famílias",
+  eyebrow: "Escritório de advocacia em Goiânia/GO",
+  titulo: "Nicoli Sociedade de Advogados",
+  slogan: "Advocacia estratégica para empresas, patrimônios e famílias.",
   subtitulo:
-    "Advocacia full service com sede em Goiânia e atuação em todo o Brasil. Profundidade técnica e experiência empresarial a serviço de quem decide.",
-  ctaPrimario: { rotulo: "Agendar uma conversa", destino: "contato" },
+    "Escritório full service sediado em Goiânia, com atuação em todo o Brasil.",
+  ctaPrimario: { rotulo: "Agendar uma reunião", destino: "contato" },
   ctaSecundario: { rotulo: "Conversar pelo WhatsApp", destino: "whatsapp" },
 };
 
 export const HOME_CREDENCIAIS: Credencial[] = [
   { valor: "23+", rotulo: "anos de advocacia trabalhista do sócio-fundador" },
   { valor: "Mestre", rotulo: "em Direito do Trabalho" },
-  { valor: "11", rotulo: "áreas de atuação com núcleos especializados" },
-  { valor: "Brasil", rotulo: "Atuação em todo o território nacional" },
+  { valor: "11", rotulo: "áreas de atuação" },
+  { valor: "Brasil", rotulo: "atuação em todo o Brasil" },
 ];
 
 export const HOME_MANIFESTO: BlocoTexto = {
   eyebrow: "Nosso posicionamento",
-  titulo: "Técnica de quem advoga. Visão de quem empreende.",
+  titulo: "Tradição e modernidade a serviço dos nossos clientes.",
   paragrafos: [
     "O sócio-fundador da Nicoli tem mais de 23 anos de advocacia trabalhista e é empresário no agronegócio, na construção civil, no mercado imobiliário e em locação. Conhece por dentro as decisões, os riscos e a gestão de pessoas de quem emprega e investe.",
     "Profundidade técnica e experiência empresarial para proteger empresas, patrimônios e famílias.",
@@ -99,10 +102,9 @@ export const HOME_MANIFESTO: BlocoTexto = {
 };
 
 export const HOME_DIFERENCIAIS: SecaoLista = {
-  eyebrow: "Por que a Nicoli",
-  titulo: "Quatro razões para confiar a sua decisão ao nosso time",
-  intro:
-    "Tradição e modernidade a serviço dos nossos clientes.",
+  eyebrow: "Diferenciais",
+  titulo: "Por que escolher a Nicoli",
+  intro: "",
   itens: [
     {
       titulo: "Liderança que também empreende",
@@ -112,7 +114,7 @@ export const HOME_DIFERENCIAIS: SecaoLista = {
     {
       titulo: "Autoridade técnica",
       descricao:
-        "Sócio-fundador mestre em Direito do Trabalho, com mais de 23 anos de advocacia.",
+        "Sócio-fundador mestre em Direito do Trabalho, com mais de 23 anos de advocacia trabalhista.",
     },
     {
       titulo: "Método de dupla revisão",
@@ -142,8 +144,7 @@ export const HOME_METODO: SecaoLista = {
 export const HOME_AREAS: SecaoAreas = {
   eyebrow: "Áreas de atuação",
   titulo: "Atuação organizada para dois públicos",
-  intro:
-    "Cada área tem página própria, com chamada para contato e formulário. Escolha o caminho que corresponde à sua necessidade.",
+  intro: "Escolha o caminho que corresponde à sua necessidade.",
   empresas: {
     titulo: "Empresas e patrimônios",
     texto:
@@ -200,6 +201,6 @@ export const HOME_CTA_FINAL: CtaFinalHome = {
   titulo: "Vamos conversar sobre o seu caso",
   texto:
     "Conte brevemente a sua situação e agende uma reunião.",
-  ctaPrimario: { rotulo: "Agendar uma conversa", destino: "contato" },
+  ctaPrimario: { rotulo: "Agendar uma reunião", destino: "contato" },
   ctaSecundario: { rotulo: "Conversar pelo WhatsApp", destino: "whatsapp" },
 };

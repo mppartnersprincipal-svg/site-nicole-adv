@@ -26,7 +26,7 @@ export const area: AreaAtuacao = {
     titulo: "Advogado de família e inventário em Goiânia",
     subtitulo:
       "Divórcio, guarda, pensão, inventário e planejamento sucessório conduzidos com discrição, clareza e prioridade para a solução consensual.",
-    cta: "Agendar uma conversa",
+    cta: "Agendar uma reunião",
   },
   resumo:
     "Na Nicoli Sociedade de Advogados, o advogado de família e sucessões atende pessoas e famílias em divórcio e dissolução de união estável, guarda e pensão alimentícia, inventário judicial e extrajudicial, testamentos e planejamento sucessório. O atendimento é reservado e busca, de forma prioritária, a solução consensual. Sede em Goiânia e atuação em todo o Brasil.",

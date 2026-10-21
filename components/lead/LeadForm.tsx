@@ -34,7 +34,7 @@ export function LeadForm({
   formId,
   area,
   publico = "empresas",
-  titulo = "Agende uma conversa",
+  titulo = "Agende uma reunião",
   subtitulo = "Conte brevemente o seu caso. Você continua a conversa com a nossa equipe pelo WhatsApp.",
   tom = "claro",
   className,

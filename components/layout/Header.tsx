@@ -148,7 +148,7 @@ export function Header() {
             )}
           >
             <IconeWhatsApp className="size-4" />
-            Agendar conversa
+            Agendar reunião
           </a>
           <button
             ref={botaoMenuRef}
@@ -267,7 +267,7 @@ function MenuMobile({ aberto, onNavegar }: { aberto: boolean; onNavegar: () => v
             className="flex min-h-14 items-center justify-center gap-3 rounded-full bg-bordo-700 text-[0.8125rem] font-medium uppercase tracking-[0.16em] text-marfim"
           >
             <IconeWhatsApp className="size-5" />
-            Agendar uma conversa
+            Agendar uma reunião
           </a>
           <a
             href={`tel:${SITE.telefone.e164}`}
