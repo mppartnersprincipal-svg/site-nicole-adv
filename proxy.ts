@@ -34,7 +34,9 @@ export function proxy(request: NextRequest) {
   if (!destino) {
     // skipTrailingSlashRedirect está ligado: a remoção da barra final é feita aqui (1 salto só)
     if (pathname.length > 1 && pathname.endsWith("/")) {
-      const semBarra = request.nextUrl.clone();
+      // URL padrão, não nextUrl.clone(): o NextURL lembra a barra final da requisição e a recoloca
+      // ao serializar, o que gerava loop (/contato/ → /contato/)
+      const semBarra = new URL(request.url);
       semBarra.pathname = pathname.replace(/\/+$/, "");
       return NextResponse.redirect(semBarra, 308);
     }
