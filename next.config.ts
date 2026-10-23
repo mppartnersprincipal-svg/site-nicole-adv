@@ -33,6 +33,8 @@ const nextConfig: NextConfig = {
     return [
       { source: "/areas", destination: "/areas-de-atuacao", permanent: true },
       { source: "/equipe", destination: "/quem-somos#socios", permanent: true },
+      // Sitemap do WordPress antigo (Yoast), que pode estar cadastrado no Search Console
+      { source: "/sitemap_index.xml", destination: "/sitemap.xml", permanent: true },
     ];
   },
   async headers() {
