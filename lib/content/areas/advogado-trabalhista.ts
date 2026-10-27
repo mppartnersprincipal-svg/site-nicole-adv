@@ -23,7 +23,7 @@ export const area: AreaAtuacao = {
   },
   hero: {
     eyebrow: "Trabalhista · Direitos do trabalhador",
-    titulo: "Advogado trabalhista em Goiânia para defender seus direitos",
+    titulo: "Advogado trabalhista para defender seus direitos",
     subtitulo:
       "Foi demitido, tem verbas não pagas ou sofreu acidente, doença ou assédio no trabalho? Analisamos seus documentos e explicamos com clareza o que pode ser feito.",
     cta: "Analisar meu caso",
